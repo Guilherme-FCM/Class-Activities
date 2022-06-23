@@ -6,12 +6,15 @@ package DAO;
 
 import Model.Activity;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,9 +51,24 @@ public class ActivityDao {
 //        
 //    }
 //    
-//    public boolean insert(Activity activity){
-//        
-//    }
+    public int insert(Activity activity){
+        Connection connection = DaoConnection.getConnection();
+        try {
+            PreparedStatement stm = connection.prepareStatement(
+                "insert into Activities (title, description, teacher, subject, deadline) values (?, ?, ?, ?, ?);"
+            );
+            stm.setString(1, activity.getTitle());
+            stm.setString(2, activity.getDescription());
+            stm.setString(3, activity.getTeacher());
+            stm.setString(4, activity.getSubject());
+            stm.setDate(5, activity.getDeadline());
+            
+            return stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ActivityDao.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
 //    
 //    public boolean update(Activity activity){
 //        
