@@ -1,24 +1,28 @@
 package Controller;
 
+import DAO.ActivityDao;
+import Model.Activity;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "activities", value = "/activities")
+@WebServlet(name = "activities", value = "/")
 public class Activities extends HttpServlet {
     public void init() {}
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/xml");
-        try {
-//            request.setAttribute("activities", activities);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } catch (ServletException ex) {
-            Logger.getLogger(Activities.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        ActivityDao dao = new ActivityDao();
+        List<Activity> activities = dao.selectAll();
+        
+        RequestDispatcher rd = null;
+        request.setAttribute("activities", activities);   
+        rd = request.getRequestDispatcher("views/activities.jsp");
+        rd.forward(request, response);
     }
 
     public void destroy() {

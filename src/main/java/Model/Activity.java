@@ -11,8 +11,18 @@ import java.util.Date;
  * @author GuilhermeFCM
  */
 public class Activity {
+    private int id;
     private String title, description, teacher, subject;
     private Date deadline;
+
+    public Activity(int id, String title, String description, String teacher, String subject, Date deadline) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.teacher = teacher;
+        this.subject = subject;
+        this.deadline = deadline;
+    }
 
     public Activity(String title, String description, String teacher, String subject, Date deadline) {
         this.title = title;
@@ -21,6 +31,16 @@ public class Activity {
         this.subject = subject;
         this.deadline = deadline;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getTitle() {
         return title;

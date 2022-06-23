@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ActivityDao {
     public List<Activity> selectAll(){
-        Connection connection = new DaoConnection().getConnection();
+        Connection connection = DaoConnection.getConnection();
         List<Activity> activities = new ArrayList();
         String query = "select * from activities;";
         
@@ -28,14 +28,14 @@ public class ActivityDao {
             ResultSet result = stm.executeQuery(query);
             
             while(result.next()){
-//                int id = result.getInt("id");
+                int id = result.getInt("id");
                 String title = result.getString("title");
                 String description = result.getString("description");
                 String teacher = result.getString("teacher");
                 String subject = result.getString("subject");
                 Date deadline = result.getDate("deadline");
                 
-                activities.add( new Activity(title, description, teacher, subject, deadline) );
+                activities.add( new Activity(id, title, description, teacher, subject, deadline) );
             }
         } catch(SQLException ex) {
             System.err.println("Erro de conexão.");

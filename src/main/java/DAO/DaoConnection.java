@@ -16,14 +16,14 @@ import java.util.logging.Logger;
  */
 public class DaoConnection {
 
-    private final String url = "jdbc:postegresql://localhost:Class-Activities";
-    private final String user = "root";
-    private final String password = "root";
+    static private final String url = "jdbc:postgresql://localhost:5432/Class-Activities";
+    static private final String user = "postgres";
+    static private final String password = "root";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName("org.postegresql.Driver");
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DaoConnection.class.getName()).log(Level.SEVERE, null, ex);
