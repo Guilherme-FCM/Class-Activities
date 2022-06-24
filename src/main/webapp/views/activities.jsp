@@ -36,8 +36,8 @@
                         <td><%= activity.getSubject()%></td>
                         <td><%= activity.getDeadline()%></td>
                         <td>
-                            <button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                            <a href="/edit?id=<%=activity.getId()%>" class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/delete?id=<%=activity.getId()%>" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 <% } %>
